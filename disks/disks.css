@@ -30,6 +30,10 @@ body {
 }
 
 .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding: 25px;
 }
 
@@ -49,7 +53,7 @@ body {
 }
 
 .storinator-row {
-    display: table-cell;
+    display: none;
     background-color: #000000;
     width: 100px;
     overflow: auto;
@@ -58,6 +62,8 @@ body {
 .disk {
     background-color: #EEEEEE;
     margin: 5px;
+    padding-left: 10px;
+    cursor: pointer;
 }
 
 .storinator-fans {
@@ -75,4 +81,33 @@ body {
     height: 90px;
     width: 90px;
     margin: 10px;
+}
+
+#info-window {
+    display: flex;
+    flex-direction: column;
+    background-color: #EEEEEE;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+#info-window .key {
+    float: left;
+}
+
+#info-window .value {
+    float: right;
+}
+
+.button-45D {
+    margin-left: 25px;
+    font-weight: bold;
+    font-size: 125%;
+}
+
+#error-output {
+    margin-left: 25px;
+    color: #FF0000;
+    font-weight: bold;
+    font-size: 150%;
 }

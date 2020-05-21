@@ -17,6 +17,7 @@
             <img src="img/45-brand-dark.png">
             <h1>Storinator Disk Info</h1>
         </div>
+        
         <div class="content-wrapper">
             <div id="chassis">
                 <div id="storinator-grid">
@@ -95,7 +96,66 @@
                     <img src="img/fan_slots.png">
                 </div>
             </div>
+            <div id="info-window">
+                <h2>Disk Information</h2>
+                <div>
+                    <div class="key">Bay ID: </div><div class="value" id="bay-id">?</div>
+                </div>
+                <div>
+                    <div class="key">Bay Occupied: </div><div class="value" id="occupied">?</div>
+                </div>
+                <div>
+                    <div class="key">Device Path: </div><div class="value" id="dev">?</div>
+                </div>
+                <div>
+                    <div class="key">Capacity: </div><div class="value" id="capacity">?</div>
+                </div>
+                <div>
+                    <div class="key">Number of Partitions: </div><div class="value" id="partitions">?</div>
+                </div>
+                <div>
+                    <div class="key">Health: </div><div class="value" id="health">?</div>
+                </div>
+                <div>
+                    <div class="key">Temperature: </div><div class="value" id="temp">?</div>
+                </div>
+                <div>
+                    <div class="key">Power on Time: </div><div class="value" id="power-on-time">?</div>
+                </div>
+                <div>
+                    <div class="key">Model Family: </div><div class="value" id="model-family">?</div>
+                </div>
+                <div>
+                    <div class="key">Model Name: </div><div class="value" id="model-name">?</div>
+                </div>
+                <div>
+                    <div class="key">Serial Number: </div><div class="value" id="serial">?</div>
+                </div>
+                <div>
+                    <div class="key">Firmware Version: </div><div class="value" id="firm-ver">?</div>
+                </div>
+                <div>
+                    <div class="key">Rotation Rate: </div><div class="value" id="rotation-rate">?</div>
+                </div>
+                <div>
+                    <div class="key">Start Stop Count: </div><div class="value" id="start-stop-count">?</div>
+                </div>
+                <div>
+                    <div class="key">Power Cycle Count: </div><div class="value" id="power-cycle-count">?</div>
+                </div>
+                <div>
+                    <div class="key">Current Pending Sector: </div><div class="value" id="current-pending-sector">?</div>
+                </div>
+                <div>
+                    <div class="key">Offline Uncorrectable: </div><div class="value" id="offline-uncorrectable">?</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <button class="button-45D" id="refresh-button">Refresh Data</button>
+            <h2 id="error-output"></h2>
         </div>
     </div>
 </body>
+<script src="local.js"></script>
 </html>
