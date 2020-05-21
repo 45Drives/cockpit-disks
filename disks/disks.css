@@ -1,0 +1,78 @@
+
+body {
+    background-image: url("img/light-background.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.header-45D {
+    background-color: #151515;
+    width: 100%;
+    padding: 15px;
+    margin: 0;
+    overflow: auto;
+}
+
+.header-45D img {
+    width: 250px;
+    height: auto;
+    float: left;
+}
+
+.header-45D h1 {
+    color: #FFFFFF;
+    padding: 15px;
+}
+
+.content-wrapper {
+    padding: 25px;
+}
+
+#chassis {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+#storinator-grid {
+    display: inline-table;
+    border-collapse: separate;
+    border-spacing: 15px;
+    background-color: #212427;
+    outline: 2px solid black;
+}
+
+.storinator-row {
+    display: table-cell;
+    background-color: #000000;
+    width: 100px;
+    overflow: auto;
+}
+
+.disk {
+    background-color: #EEEEEE;
+    margin: 5px;
+}
+
+.storinator-fans {
+    display: flex;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    background-color: #212427;
+    outline: 2px solid black;
+    transform: translate(-25%,0) perspective(1000px) rotateY(60deg);
+}
+
+.storinator-fans img {
+    height: 90px;
+    width: 90px;
+    margin: 10px;
+}
