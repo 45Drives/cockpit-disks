@@ -66,19 +66,27 @@ function set_up_disk_buttons() {
             }
         }
         if(disk_info.rows[row][bay]["occupied"])  {
+            disk.style.backgroundColor = "lightgray";
+            disk.style.color = "black";
+            var img = document.createElement("img");
             if(disk_info.rows[row][bay]["partitions"] == 0) {
-                disk.style.backgroundColor = "lightgray";
-                disk.style.color = "black";
-                var img = document.createElement("img");
-                img.src = "img/disk-unpartitioned.png";
-                disk.appendChild(img);
+                if(disk_info.rows[row][bay]["health"] == "OK") {
+                    img.src = "img/disk-unpartitioned-ok.png";
+                }else if(disk_info.rows[row][bay]["health"] == "POOR") {
+                    img.src = "img/disk-unpartitioned-poor.png";
+                }else{
+                    img.src = "img/disk-unpartitioned.png";
+                }
             }else{
-                disk.style.backgroundColor = "lightgray";
-                disk.style.color = "black";
-                var img = document.createElement("img");
-                img.src = "img/disk-partitioned.png";
-                disk.appendChild(img);
+                if(disk_info.rows[row][bay]["health"] == "OK") {
+                    img.src = "img/disk-partitioned-ok.png";
+                }else if(disk_info.rows[row][bay]["health"] == "POOR") {
+                    img.src = "img/disk-partitioned-poor.png";
+                }else{
+                    img.src = "img/disk-partitioned.png";
+                }
             }
+            disk.appendChild(img);
         }else{
             disk.style.backgroundColor = "transparent";
             disk.style.color = "grey";
