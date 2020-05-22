@@ -101,6 +101,7 @@ body {
 
 #info-window .key {
     float: left;
+    margin-right: 25px;
 }
 
 #info-window .value {
