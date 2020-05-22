@@ -48,6 +48,9 @@ function set_disk_info(row, bay) {
     var values = document.getElementsByClassName("value");
     for(value of values) {
         value.innerHTML = disk_info.rows[row][bay][value.id];
+        if(value.innerHTML == "") {
+            value.innerHTML = "?";
+        }
     }
 }
 
