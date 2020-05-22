@@ -65,7 +65,7 @@ function set_up_disk_buttons() {
                 value.innerHTML = disk_info.rows[row][bay][value.id];
             }
         }
-        if(disk_info.rows[row][bay][occupied])  {
+        if(disk_info.rows[row][bay][occupied] == "true")  {
             if(disk_info.rows[row][bay][partitions] == 0) {
                 disk.style.backgroundColor = "green";
                 disk.style.color = "black";
