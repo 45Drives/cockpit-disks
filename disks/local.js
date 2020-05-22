@@ -117,8 +117,20 @@ function spin_fans() {
     }
 }
 
+function export_JSON() {
+    let data = JSON.stringify(disk_info, null, 4);
+    let dataURI = 'data:application/json;charset=utf-8,'+ encodeURIComponent(data);
+    let a = document.createElement('a');
+    a.style.display = "none";
+    a.setAttribute('href', dataURI);
+    a.setAttribute('download', 'storinator-disk-info.json');
+    a.click();
+}
+
 function main() {
     refresh_button.addEventListener("click", grab_info);
+    let export_button = document.getElementById("download-json-button");
+    export_button.addEventListener("click", export_JSON);
     spin_fans();
     var promise = grab_info();
     promise.done(function() {

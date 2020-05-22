@@ -6,6 +6,5 @@
             "label": "Disk Info",
             "path": "disks.html"
         }
-    },
-    "content-security-policy": "connect-src 'self'; default-src 'self'; script-src 'self'; style-src 'self'"
+    }
 }
