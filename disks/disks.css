@@ -118,6 +118,10 @@ body {
     margin-right: 1em;
 }
 
+.values .value {
+    white-space: nowrap;
+}
+
 .button-45D {
     margin-left: 25px;
     font-weight: bold;
