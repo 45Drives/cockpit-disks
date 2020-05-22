@@ -19,6 +19,7 @@ function grab_info() {
         let regex = current_bay.match(/(\d)-(\d+)/);
         let row = regex[1] - 1;
         let bay = regex[2] - 1;
+        set_up_disk_buttons();
         set_disk_info(row, bay);
     }
     return dfd.promise();
