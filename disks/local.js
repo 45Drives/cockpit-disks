@@ -65,10 +65,11 @@ function set_up_disk_buttons() {
         if(row >= disk_info.rows.length || bay >= disk_info.rows[row].length)
             continue;
         disk.onclick = function() {
-            var values = document.getElementsByClassName("value");
+            set_disk_info(row, bay);
+            /*var values = document.getElementsByClassName("value");
             for(value of values){
                 value.innerHTML = disk_info.rows[row][bay][value.id];
-            }
+            }*/
         }
         if(disk_info.rows[row][bay]["occupied"])  {
             disk.style.backgroundColor = "lightgray";
