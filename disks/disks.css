@@ -100,12 +100,20 @@ body {
 }
 
 .key-value-wrapper {
+    font-family: Courier, Monaco, monospace;
     display: flex;
     flex-direction: row;
 }
 
+.keys {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
 .keys .key {
-    margin-right: 25px;
+    margin-right: 1em;
+    overflow: hidden;
 }
 
 .button-45D {
