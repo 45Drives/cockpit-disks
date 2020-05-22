@@ -54,6 +54,12 @@ function set_disk_info(row, bay) {
             value.innerHTML = val;
         }
     }
+    var health = document.getElementById("health");
+    if(health.innerHTML == "OK") {
+        health.style.color = "#19911d";
+    }else if(health.innerHTML == "POOR") {
+        health.style.color = "#e39500";
+    }
 }
 
 function set_up_disk_buttons() {
