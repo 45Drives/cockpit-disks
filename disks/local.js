@@ -66,7 +66,7 @@ function set_disk_info(row, bay) {
 function set_up_disk_buttons() {
     var disk_icons = document.getElementsByClassName("disk_icon");
     for(icon of disk_icons) {
-        icon.parentNode.removeChild(icon);
+        icon.remove();
     }
     var disks = document.getElementsByClassName("disk");
     for(disk of disks) {
