@@ -67,13 +67,13 @@ function set_up_disk_buttons() {
         }
         if(disk_info.rows[row][bay]["occupied"])  {
             if(disk_info.rows[row][bay]["partitions"] == 0) {
-                disk.style.backgroundColor = "limegreen";
+                disk.style.backgroundColor = "darkgray";
                 disk.style.color = "black";
                 var img = document.createElement("img");
                 img.src = "img/disk-unpartitioned.png";
                 disk.appendChild(img);
             }else{
-                disk.style.backgroundColor = "lime";
+                disk.style.backgroundColor = "lightgray";
                 disk.style.color = "black";
                 var img = document.createElement("img");
                 img.src = "img/disk-partitioned.png";
