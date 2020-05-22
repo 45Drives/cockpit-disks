@@ -60,6 +60,8 @@ function set_disk_info(row, bay) {
         health.style.color = "#19911d";
     }else if(health.innerHTML == "POOR") {
         health.style.color = "#e39500";
+    }else{
+        health.style.color = "";
     }
 }
 
