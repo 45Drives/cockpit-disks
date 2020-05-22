@@ -99,13 +99,13 @@ body {
     border-radius: 15px;
 }
 
-#info-window .key {
-    float: left;
-    margin-right: 25px;
+.key-value-wrapper {
+    display: flex;
+    flex-direction: row;
 }
 
-#info-window .value {
-    float: right;
+.keys .key {
+    margin-right: 25px;
 }
 
 .button-45D {
