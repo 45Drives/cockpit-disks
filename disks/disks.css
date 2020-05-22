@@ -60,6 +60,7 @@ body {
 }
 
 .disk {
+    white-space: nowrap;
     background-color: #EEEEEE;
     margin: 5px;
     padding-left: 10px;
@@ -109,11 +110,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    flex-wrap: nowrap;
 }
 
 .keys .key {
+    white-space: nowrap;
     margin-right: 1em;
-    overflow: hidden;
 }
 
 .button-45D {
