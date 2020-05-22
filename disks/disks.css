@@ -81,6 +81,9 @@ body {
     flex-flow: column nowrap;
     justify-content: space-between;
     background-color: #212427;
+    background-image: url("img/face-plate.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     outline: 5px solid black;
     transform: translate(-25%,0) perspective(1000px) rotateY(60deg);
     overflow: hidden;
