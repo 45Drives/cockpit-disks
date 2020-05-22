@@ -64,6 +64,10 @@ function set_disk_info(row, bay) {
 }
 
 function set_up_disk_buttons() {
+    var disk_icons = document.getElementsByClassName("disk_icon");
+    for(icon of disk_icons) {
+        icon.parentNode.removeChild(icon);
+    }
     var disks = document.getElementsByClassName("disk");
     for(disk of disks) {
         let regex = disk.id.match(/disk-(\d)-(\d+)/);
@@ -82,6 +86,7 @@ function set_up_disk_buttons() {
             disk.style.backgroundColor = "lightgray";
             disk.style.color = "black";
             var img = document.createElement("img");
+            img.className += "disk_icon";
             if(disk_info.rows[row][bay]["partitions"] == 0) {
                 if(disk_info.rows[row][bay]["health"] == "OK") {
                     img.src = "img/disk-unpartitioned-ok.png";
