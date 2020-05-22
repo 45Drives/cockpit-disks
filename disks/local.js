@@ -67,7 +67,7 @@ function set_up_disk_buttons() {
         }
         if(disk_info.rows[row][bay]["occupied"])  {
             if(disk_info.rows[row][bay]["partitions"] == 0) {
-                disk.style.backgroundColor = "darkgray";
+                disk.style.backgroundColor = "lightgray";
                 disk.style.color = "black";
                 var img = document.createElement("img");
                 img.src = "img/disk-unpartitioned.png";
