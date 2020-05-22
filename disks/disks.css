@@ -49,7 +49,7 @@ body {
     border-collapse: separate;
     border-spacing: 15px;
     background-color: #212427;
-    outline: 2px solid black;
+    outline: 5px solid black;
 }
 
 .storinator-row {
@@ -73,8 +73,9 @@ body {
     flex-flow: column nowrap;
     justify-content: space-between;
     background-color: #212427;
-    outline: 2px solid black;
+    outline: 5px solid black;
     transform: translate(-25%,0) perspective(1000px) rotateY(60deg);
+    overflow: hidden;
 }
 
 .storinator-fans img {
