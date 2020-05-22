@@ -65,17 +65,23 @@ function set_up_disk_buttons() {
                 value.innerHTML = disk_info.rows[row][bay][value.id];
             }
         }
-        if(disk_info.rows[row][bay][occupied] == "true")  {
-            if(disk_info.rows[row][bay][partitions] == 0) {
+        if(disk_info.rows[row][bay]["occupied"])  {
+            if(disk_info.rows[row][bay]["partitions"] == 0) {
                 disk.style.backgroundColor = "green";
                 disk.style.color = "black";
+                var img = document.createElement("img");
+                img.src = "img/disk-unpartitioned.png";
+                disk.appendChild(img);
             }else{
-                disk.style.backgroundColor = "lightgreen";
+                disk.style.backgroundColor = "lime";
                 disk.style.color = "black";
+                var img = document.createElement("img");
+                img.src = "img/disk-partitioned.png";
+                disk.appendChild(img);
             }
         }else{
             disk.style.backgroundColor = "transparent";
-            disk.style.color = "lightgrey";
+            disk.style.color = "grey";
         }
     }
 }

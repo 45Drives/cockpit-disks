@@ -66,6 +66,12 @@ body {
     cursor: pointer;
 }
 
+.disk img {
+    width: 30px;
+    height: auto;
+    float: right;
+}
+
 .storinator-fans {
     display: flex;
     padding-top: 25px;
