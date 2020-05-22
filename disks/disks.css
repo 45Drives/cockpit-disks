@@ -64,12 +64,16 @@ body {
     margin: 5px;
     padding-left: 10px;
     cursor: pointer;
+    position: relative;
 }
 
 .disk img {
     width: 30px;
     height: auto;
     float: right;
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
 }
 
 .storinator-fans {
