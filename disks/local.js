@@ -47,9 +47,11 @@ function set_rows_visible() {
 function set_disk_info(row, bay) {
     var values = document.getElementsByClassName("value");
     for(value of values) {
-        value.innerHTML = disk_info.rows[row][bay][value.id];
-        if(value.innerHTML == "" || value.innerHTML == null) {
+        var val = disk_info.rows[row][bay][value.id];
+        if(val.length == 0) {
             value.innerHTML = "?";
+        }else{
+            value.innerHTML = val;
         }
     }
 }
