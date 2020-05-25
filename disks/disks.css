@@ -154,6 +154,8 @@ a.button-45D {
 label {
     margin-left: 0.5em;
     margin-right: 0.5em;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 input[type=number] {
@@ -209,5 +211,6 @@ input[type=number] {
 input[type=radio] {
     margin-left: 15px;
     margin-right: -5px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
-
