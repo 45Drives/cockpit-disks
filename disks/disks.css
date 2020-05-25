@@ -126,9 +126,10 @@ body {
 }
 
 .button-45D {
-    margin-left: 25px;
     font-weight: bold;
     font-size: 125%;
+    margin-left: 10px;
+    margin-right: 5px;
 }
 
 a.button-45D {
@@ -167,10 +168,12 @@ input[type=number] {
 .box {
     flex-grow: none;
     align-self: center;
+    justify-content: space-between;
     display: flex;
     align-items: center;
     background-color: #EEEEEE;
     padding: 15px;
+    padding-left: 5px;
     border-radius: 15px;
 }
 
