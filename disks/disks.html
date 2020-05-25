@@ -97,8 +97,8 @@
             </div>
             <div id="temp-scale"></div>
             <div id="temp-limits">
-                <p id="min-temp-limit"></p>
-                <p id="max-temp-limit"></p>
+                <p id="min-temp-limit" class="temperature"></p>
+                <p id="max-temp-limit" class="temperature"></p>
             </div>
             <div id="info-window">
                 <h2>Disk Information</h2>
@@ -129,7 +129,7 @@
                         <div class="value" id="capacity">?</div>
                         <div class="value" id="partitions">?</div>
                         <div class="value" id="health">?</div>
-                        <div class="value" id="temp-c">?</div>
+                        <div class="value temperature" id="temp-c">?</div>
                         <div class="value" id="power-on-time">?</div>
                         <div class="value" id="model-family">?</div>
                         <div class="value" id="model-name">?</div>
@@ -155,6 +155,12 @@
                 <label for="max-temp">max:</label>
                 <input type="number" id="max-temp" value=60>
                 <p id="temp-error"></p>
+                <div>
+                    <input type="radio" name="temp-unit" id="celsius" checked=true>
+                    <label for="celsius">&#8451;</label><br>
+                    <input type="radio" name="temp-unit" id="fahrenheit">
+                    <label for="fahrenheit">&#8457;</label>
+                </div>
             </div>
         </div>
     </div>

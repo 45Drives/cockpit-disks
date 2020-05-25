@@ -62,6 +62,7 @@ function set_disk_info(row, bay) {
     }else{
         health.style.color = "";
     }
+    changeTempUnit();
 }
 
 function set_up_disk_buttons() {
@@ -171,6 +172,12 @@ function mapTempToColour(tempStr, min, max) {
 function heatmap() {
     let min = document.getElementById("min-temp").valueAsNumber;
     let max = document.getElementById("max-temp").valueAsNumber;
+    let min_orig = min;
+    let max_orig = max;
+    if(document.getElementById("fahrenheit").checked) {
+        min = Math.round((min - 32) * 5 / 9);
+        max = Math.round((max - 32) * 5 / 9);
+    }
     if(min < max) {
         document.getElementById("temp-error").innerHTML = "";
     }else{
@@ -204,12 +211,26 @@ function heatmap() {
             tempScale.appendChild(slice);
         }
         tempLimits.style.display = "flex";
-        tempLimits.firstElementChild.innerHTML = max.toString() + "&#8451;";
-        tempLimits.lastElementChild.innerHTML = min.toString() + "&#8451;";
+        tempLimits.firstElementChild.innerHTML = max_orig.toString() + (document.getElementById("celsius").checked ? "&#8451;" : "&#8457;");
+        tempLimits.lastElementChild.innerHTML = min_orig.toString() + "&#8451;";
     }else{
         tempScale.style.display = "none";
         tempLimits.style.display = "none";
     }
+}
+
+function changeTempUnit() {
+    var temps = document.getElementsByClassName("temperature");
+    for(temp of temps) {
+        if(document.getElementById("celsius").checked && temp.innerHTML.slice(-1) === '\u2109') {
+            if(temp.old_temp_c)
+                temp.innerHTML = temp.old_temp_c;
+        }else if(document.getElementById("fahrenheit").checked && temp.innerHTML.slice(-1) === '\u2103') {
+            temp.old_temp_c = temp.innerHTML;
+            temp.innerHTML = (parseInt(temp.innerHTML.match(/\d{1,3}/)) * 9 / 5 + 32).toString() + "&#8457;";
+        }
+    }
+    heatmap();
 }
 
 function main() {
@@ -218,6 +239,8 @@ function main() {
     document.getElementById("toggle-heatmap").addEventListener("change", heatmap);
     document.getElementById("min-temp").addEventListener("change", heatmap);
     document.getElementById("max-temp").addEventListener("change", heatmap);
+    document.getElementById("celsius").addEventListener("change", changeTempUnit);
+    document.getElementById("fahrenheit").addEventListener("change", changeTempUnit);
     spin_fans();
     var promise = grab_info();
     promise.done(function() {
