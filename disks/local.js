@@ -1,4 +1,3 @@
-const refresh_button = document.getElementById("refresh-button");
 const err_msg = document.getElementById("error-output");
 
 var disk_info;
@@ -83,8 +82,7 @@ function set_up_disk_buttons() {
         if(disk.childNodes.length > 1){
             disk.removeChild(disk.childNodes[1]);
         }
-        if(disk_info.rows[row][bay]["occupied"])  {
-            disk.style.backgroundColor = "lightgray";
+        if(disk_info.rows[row][bay]["occupied"]) {
             disk.style.color = "black";
             var img = document.createElement("img");
             if(disk_info.rows[row][bay]["partitions"] == 0) {
@@ -110,6 +108,7 @@ function set_up_disk_buttons() {
             disk.style.color = "grey";
         }
     }
+    heatmap();
 }
 
 function spin_fans() {
@@ -141,9 +140,84 @@ function export_JSON() {
     window.open(dataURI);
 }
 
+function mapTempToColour(tempStr, min, max) {
+    let tempNum = parseInt(tempStr.match(/\d{1,3}/));
+    if(tempNum > max)
+        tempNum = max;
+    else if(tempNum < min)
+        tempNum = min;
+    tempNum -= min;
+    max -= min; // 0 to (max - min)
+    let slope = (255 / ((max)/3));
+    let R = Math.round(slope * (tempNum - max/3));
+    if(R > 255)
+        R = 255;
+    else if(R < 0)
+        R = 0;
+    let G = Math.round(-1 * slope * (tempNum - max));
+    if(G > 255)
+        G = 255;
+    else if(R < 0)
+        G = 0;
+    let B = Math.round(-1 * slope * (tempNum - max/3));
+    if(B > 255)
+        B = 255;
+    else if(B < 0)
+        B = 0;
+    let colourStr = `#${("0" + R.toString(16)).slice(-2)}${("0" + G.toString(16)).slice(-2)}${("0" + B.toString(16)).slice(-2)}`;
+    return colourStr;
+}
+
+function heatmap() {
+    let min = document.getElementById("min-temp").valueAsNumber;
+    let max = document.getElementById("max-temp").valueAsNumber;
+    if(min < max) {
+        document.getElementById("temp-error").innerHTML = "";
+    }else{
+        document.getElementById("temp-error").innerHTML = "Min temp must be less than max temp!";
+        return;
+    }
+    var disks = document.getElementsByClassName("disk");
+    for(disk of disks) {
+        let regex = disk.id.match(/disk-(\d)-(\d+)/);
+        let row = regex[1] - 1;
+        let bay = regex[2] - 1;
+        if(row >= disk_info.rows.length || bay >= disk_info.rows[row].length)
+            continue;
+        if(disk_info.rows[row][bay]["occupied"]) {
+            if(document.getElementById("toggle-heatmap").checked == false)
+                disk.style.backgroundColor = "lightgray";
+            else
+                disk.style.backgroundColor = mapTempToColour(disk_info.rows[row][bay]["temp-c"], min, max);
+        }
+    }
+    const tempScale = document.getElementById("temp-scale");
+    const tempLimits = document.getElementById("temp-limits");
+    if(document.getElementById("toggle-heatmap").checked == true){
+        while(tempScale.lastElementChild)
+            tempScale.removeChild(tempScale.lastElementChild);
+        tempScale.style.display = "flex";
+        for(var i = 50; i >= 0; i--){
+            var slice = document.createElement("div");
+            slice.className += "temp-gradient-slice";
+            slice.style.backgroundColor = mapTempToColour(i.toString(), 0, 50);
+            tempScale.appendChild(slice);
+        }
+        tempLimits.style.display = "flex";
+        tempLimits.firstElementChild.innerHTML = max.toString() + "&#8451;";
+        tempLimits.lastElementChild.innerHTML = min.toString() + "&#8451;";
+    }else{
+        tempScale.style.display = "none";
+        tempLimits.style.display = "none";
+    }
+}
+
 function main() {
-    refresh_button.addEventListener("click", grab_info);
+    document.getElementById("refresh-button").addEventListener("click", grab_info);
     document.getElementById("export-json-button").addEventListener("click", export_JSON);
+    document.getElementById("toggle-heatmap").addEventListener("change", heatmap);
+    document.getElementById("min-temp").addEventListener("change", heatmap);
+    document.getElementById("max-temp").addEventListener("change", heatmap);
     spin_fans();
     var promise = grab_info();
     promise.done(function() {

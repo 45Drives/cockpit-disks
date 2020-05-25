@@ -95,6 +95,11 @@
                     <img class="rotatable" src="img/fan_slots.png">
                 </div>
             </div>
+            <div id="temp-scale"></div>
+            <div id="temp-limits">
+                <p id="min-temp-limit"></p>
+                <p id="max-temp-limit"></p>
+            </div>
             <div id="info-window">
                 <h2>Disk Information</h2>
                 <div class="key-value-wrapper">
@@ -140,9 +145,17 @@
             </div>
         </div>
         <div class="content-wrapper">
-            <button class="button-45D" id="refresh-button">Refresh Data</button>
-            <button class="button-45D" id="export-json-button">Export JSON</button>
-            <h2 id="error-output"></h2>
+            <div class="box">
+                <button class="button-45D" id="refresh-button">Refresh Data</button>
+                <button class="button-45D" id="export-json-button">Export JSON</button>
+                <input type="checkbox" id="toggle-heatmap">
+                <label for="toggle-heatmap">Toggle Heatmap</label>
+                <label for="min-temp">min:</label>
+                <input type="number" id="min-temp" value=0>
+                <label for="max-temp">max:</label>
+                <input type="number" id="max-temp" value=60>
+                <p id="temp-error"></p>
+            </div>
         </div>
     </div>
 </body>

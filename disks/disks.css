@@ -145,3 +145,61 @@ a.button-45D {
     font-weight: bold;
     font-size: 150%;
 }
+
+#toggle-heatmap {
+    margin-left: 2em;
+}
+
+label {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+input[type=number] {
+    width: 4em;
+}
+
+#temp-error {
+    font-weight: bold;
+    color: red;
+}
+
+.box {
+    flex-grow: none;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    background-color: #EEEEEE;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+#temp-scale {
+    display: none;
+    margin: 10px;
+    margin-left: -10px;
+    flex-direction: column;
+    align-self: stretch;
+    width: 15px;
+    outline: black 1px solid;
+}
+#temp-limits {
+    display: none;
+    margin: 10px;
+    margin-left: -5px;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: space-between;
+}
+
+#temp-limits p {
+    flex-grow: 0;
+    background-color: #FFFFFF;
+    padding: 2.5px;
+    border-radius: 2.5px;
+}
+
+.temp-gradient-slice {
+    flex-grow: 1;
+}
+
