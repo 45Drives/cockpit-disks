@@ -57,24 +57,26 @@ body {
     border-collapse: separate;
     border-spacing: 15px;
     background-color: #212427;
-    outline: 5px solid black;
+    box-shadow: -4px 0 4px -2px #020202 inset;
+    border-radius: 3px 0 0 3px;
+    /*outline: 1px solid black;*/
 }
 
 .storinator-row {
     display: none;
-    background-color: #000000;
+    background-color: #212427;
     width: 100px;
-    overflow: auto;
 }
 
 .disk {
     /*white-space: nowrap;*/
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: #EEEEEE;
     margin: 5px;
-    /*padding-left: 10px;*/
+    padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
 }
 
@@ -96,8 +98,9 @@ body {
     background-image: url("img/face-plate.png");
     background-repeat: no-repeat;
     background-size: cover;
-    outline: 5px solid black;
-    transform: translate(-25%,0) perspective(1000px) rotateY(60deg);
+    /*outline: 1px solid black;*/
+    border-radius: 3px;
+    transform: translate(-32.9%,0) perspective(1000px) rotateY(70deg);
     overflow: hidden;
 }
 

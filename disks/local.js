@@ -112,6 +112,7 @@ function set_up_disk_buttons() {
             disk.appendChild(img);
         }else{
             disk.style.backgroundColor = "transparent";
+            disk.style.boxShadow = '10px 0 10px 3px #000000 inset';
             disk.style.color = "grey";
         }
     }
@@ -185,9 +186,10 @@ function heatmap() {
         max = Math.round((max - 32) * 5 / 9);
     }
     if(min < max) {
-        document.getElementById("temp-error").innerHTML = "";
+        err_box.style.display = "none";
     }else{
-        document.getElementById("temp-error").innerHTML = "Min temp must be less than max temp!";
+        err_msg.innerHTML = "Minimum temperature must be less than maximum temperature!";
+        err_box.style.display = "block";
         return;
     }
     var disks = document.getElementsByClassName("disk");
@@ -198,10 +200,13 @@ function heatmap() {
         if(row >= disk_info.rows.length || bay >= disk_info.rows[row].length)
             continue;
         if(disk_info.rows[row][bay]["occupied"]) {
-            if(document.getElementById("toggle-heatmap").checked == false)
+            if(document.getElementById("toggle-heatmap").checked == false) {
                 disk.style.backgroundColor = "lightgray";
-            else
+                disk.style.boxShadow = "0 0 4px 0 #000000";
+            }else{
                 disk.style.backgroundColor = mapTempToColour(disk_info.rows[row][bay]["temp-c"], min, max);
+                disk.style.boxShadow = "0 0 4px 0 #000000";
+            }
         }
     }
     const tempScale = document.getElementById("temp-scale");
@@ -239,8 +244,17 @@ function changeTempUnit() {
     heatmap();
 }
 
+function refresh() {
+    var promise = grab_info();
+    promise.done(function() {
+        set_rows_visible();
+        set_disk_info(0,0);
+        set_up_disk_buttons();
+    });
+}
+
 function main() {
-    document.getElementById("refresh-button").addEventListener("click", grab_info);
+    document.getElementById("refresh-button").addEventListener("click", refresh);
     document.getElementById("export-json-button").addEventListener("click", export_JSON);
     document.getElementById("toggle-heatmap").addEventListener("change", heatmap);
     document.getElementById("min-temp").addEventListener("change", heatmap);
@@ -248,12 +262,7 @@ function main() {
     document.getElementById("celsius").addEventListener("change", changeTempUnit);
     document.getElementById("fahrenheit").addEventListener("change", changeTempUnit);
     spin_fans();
-    var promise = grab_info();
-    promise.done(function() {
-        set_rows_visible();
-        set_disk_info(0,0);
-        set_up_disk_buttons();
-    });
+    refresh();
 }
 
 main();
