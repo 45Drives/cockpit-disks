@@ -1,17 +1,23 @@
 const err_msg = document.getElementById("error-output");
+const err_box = document.getElementById("alert-box");
 
 var disk_info;
 
 function grab_info() {
     var dfd = cockpit.defer();
+    document.getElementById("loading").style.display = "block";
+    err_box.style.display = "none";
     var proc = cockpit.spawn(["/usr/local/bin/lsdev","--json"]);
     proc.done(function(data) {
         disk_info = JSON.parse(data);
         dfd.resolve();
+        document.getElementById("loading").style.display = "none";
     });
     proc.fail(function(ex) {
-        err_msg.innerHTML = "Error running lsdev";
+        err_box.style.display = "block";
+        err_msg.innerHTML = "Error running lsdev, are 45Drives tools installed?";
         dfd.reject(ex);
+        document.getElementById("loading").style.display = "none";
     });
     var current_bay = document.getElementById("bay-id").innerHTML;
     if(current_bay != "?") {
@@ -106,6 +112,7 @@ function set_up_disk_buttons() {
             disk.appendChild(img);
         }else{
             disk.style.backgroundColor = "transparent";
+            disk.style.boxShadow = '10px 0 10px 3px #000000 inset';
             disk.style.color = "grey";
         }
     }
@@ -179,9 +186,10 @@ function heatmap() {
         max = Math.round((max - 32) * 5 / 9);
     }
     if(min < max) {
-        document.getElementById("temp-error").innerHTML = "";
+        err_box.style.display = "none";
     }else{
-        document.getElementById("temp-error").innerHTML = "Min temp must be less than max temp!";
+        err_msg.innerHTML = "Minimum temperature must be less than maximum temperature!";
+        err_box.style.display = "block";
         return;
     }
     var disks = document.getElementsByClassName("disk");
@@ -192,18 +200,23 @@ function heatmap() {
         if(row >= disk_info.rows.length || bay >= disk_info.rows[row].length)
             continue;
         if(disk_info.rows[row][bay]["occupied"]) {
-            if(document.getElementById("toggle-heatmap").checked == false)
+            if(document.getElementById("toggle-heatmap").checked == false) {
                 disk.style.backgroundColor = "lightgray";
-            else
+                disk.style.boxShadow = "0 0 4px 0 #000000";
+            }else{
                 disk.style.backgroundColor = mapTempToColour(disk_info.rows[row][bay]["temp-c"], min, max);
+                disk.style.boxShadow = "0 0 4px 0 #000000";
+            }
         }
     }
+    const tempBox = document.getElementById("temp-box");
     const tempScale = document.getElementById("temp-scale");
     const tempLimits = document.getElementById("temp-limits");
     if(document.getElementById("toggle-heatmap").checked == true){
         while(tempScale.lastElementChild)
             tempScale.removeChild(tempScale.lastElementChild);
         tempScale.style.display = "flex";
+        tempBox.style.display = "flex";
         for(var i = 50; i >= 0; i--){
             var slice = document.createElement("div");
             slice.className += "temp-gradient-slice";
@@ -212,10 +225,9 @@ function heatmap() {
         }
         tempLimits.style.display = "flex";
         tempLimits.firstElementChild.innerHTML = max_orig.toString() + (document.getElementById("celsius").checked ? "&#8451;" : "&#8457;");
-        tempLimits.lastElementChild.innerHTML = min_orig.toString() + "&#8451;";
+        tempLimits.lastElementChild.innerHTML = min_orig.toString() + (document.getElementById("celsius").checked ? "&#8451;" : "&#8457;");
     }else{
-        tempScale.style.display = "none";
-        tempLimits.style.display = "none";
+        tempBox.style.display = "none";
     }
 }
 
@@ -233,8 +245,17 @@ function changeTempUnit() {
     heatmap();
 }
 
+function refresh() {
+    var promise = grab_info();
+    promise.done(function() {
+        set_rows_visible();
+        set_disk_info(0,0);
+        set_up_disk_buttons();
+    });
+}
+
 function main() {
-    document.getElementById("refresh-button").addEventListener("click", grab_info);
+    document.getElementById("refresh-button").addEventListener("click", refresh);
     document.getElementById("export-json-button").addEventListener("click", export_JSON);
     document.getElementById("toggle-heatmap").addEventListener("change", heatmap);
     document.getElementById("min-temp").addEventListener("change", heatmap);
@@ -242,12 +263,7 @@ function main() {
     document.getElementById("celsius").addEventListener("change", changeTempUnit);
     document.getElementById("fahrenheit").addEventListener("change", changeTempUnit);
     spin_fans();
-    var promise = grab_info();
-    promise.done(function() {
-        set_rows_visible();
-        set_disk_info(0,0);
-        set_up_disk_buttons();
-    });
+    refresh();
 }
 
 main();

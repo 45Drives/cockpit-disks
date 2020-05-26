@@ -34,6 +34,14 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    flex-grow: 0;
+}
+
+.outer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    flex-grow: 0;
     padding: 25px;
 }
 
@@ -49,25 +57,31 @@ body {
     border-collapse: separate;
     border-spacing: 15px;
     background-color: #212427;
-    outline: 5px solid black;
+    box-shadow: -4px 0 4px -2px #020202 inset;
+    border-radius: 3px 0 0 3px;
+    /*outline: 1px solid black;*/
 }
 
 .storinator-row {
     display: none;
-    background-color: #000000;
+    background-color: #212427;
     width: 100px;
-    overflow: auto;
 }
 
 .disk {
-    white-space: nowrap;
+    /*white-space: nowrap;*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
     background-color: #EEEEEE;
     margin: 5px;
     padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
 }
 
 .disk img {
+    flex-basis: 30px;
     width: 30px;
     height: auto;
     float: right;
@@ -84,8 +98,9 @@ body {
     background-image: url("img/face-plate.png");
     background-repeat: no-repeat;
     background-size: cover;
-    outline: 5px solid black;
-    transform: translate(-25%,0) perspective(1000px) rotateY(60deg);
+    /*outline: 1px solid black;*/
+    border-radius: 3px;
+    transform: translate(-32.9%,0) perspective(1000px) rotateY(70deg);
     overflow: hidden;
 }
 
@@ -98,9 +113,6 @@ body {
 #info-window {
     display: flex;
     flex-direction: column;
-    background-color: #EEEEEE;
-    padding: 15px;
-    border-radius: 15px;
 }
 
 .key-value-wrapper {
@@ -140,13 +152,6 @@ a.button-45D {
     color: initial;
 }
 
-#error-output {
-    margin-left: 25px;
-    color: #FF0000;
-    font-weight: bold;
-    font-size: 150%;
-}
-
 #toggle-heatmap {
     margin-left: 2em;
 }
@@ -179,18 +184,36 @@ input[type=number] {
     border-radius: 15px;
 }
 
+.control-buttons {
+    flex-grow: 0;
+    align-self: center;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.temperature-box {
+    display: none;
+    flex-direction: row;
+    align-self: stretch;
+    margin-left: -40px;
+    margin-right: 15px;
+    margin-bottom: 0;
+    padding-right: 5px;
+}
+
 #temp-scale {
     display: none;
     margin: 10px;
-    margin-left: -10px;
     flex-direction: column;
     align-self: stretch;
     width: 15px;
     outline: black 1px solid;
 }
+
 #temp-limits {
     display: none;
-    margin: 10px;
     margin-left: -5px;
     flex-direction: column;
     align-self: stretch;
@@ -213,4 +236,12 @@ input[type=radio] {
     margin-right: -5px;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.divider {
+    width: 15px;
+}
+
+#alert-box {
+    display: none;
 }
