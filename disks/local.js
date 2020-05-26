@@ -37,7 +37,7 @@ function grab_info() {
     proc.fail(function(ex) {
         err_box.style.display = "block";
         document.getElementById("loading").style.display = "none";
-        console.log(ex.exit_status);
+        console.log(ex);
         if(ex.exit_status == 2) {
             // permission denied for smartctl, some data still available
             err_msg.innerHTML = "Error running smartctl within lsdev. Some information is still available, but run as root for full disk information.";
