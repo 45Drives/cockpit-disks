@@ -68,14 +68,18 @@ body {
 }
 
 .disk {
-    white-space: nowrap;
+    /*white-space: nowrap;*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
     background-color: #EEEEEE;
     margin: 5px;
-    padding-left: 10px;
+    /*padding-left: 10px;*/
     cursor: pointer;
 }
 
 .disk img {
+    flex-basis: 30px;
     width: 30px;
     height: auto;
     float: right;
@@ -197,7 +201,6 @@ input[type=number] {
 }
 #temp-limits {
     display: none;
-    margin: 10px;
     margin-left: -5px;
     flex-direction: column;
     align-self: stretch;
