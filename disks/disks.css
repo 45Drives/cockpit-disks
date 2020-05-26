@@ -193,15 +193,25 @@ input[type=number] {
     padding: 15px;
 }
 
+.temperature-box {
+    display: none;
+    flex-direction: row;
+    align-self: stretch;
+    margin-left: -40px;
+    margin-right: 15px;
+    margin-bottom: 0;
+    padding-right: 5px;
+}
+
 #temp-scale {
     display: none;
     margin: 10px;
-    margin-left: -10px;
     flex-direction: column;
     align-self: stretch;
     width: 15px;
     outline: black 1px solid;
 }
+
 #temp-limits {
     display: none;
     margin-left: -5px;

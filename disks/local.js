@@ -209,12 +209,14 @@ function heatmap() {
             }
         }
     }
+    const tempBox = document.getElementById("temp-box");
     const tempScale = document.getElementById("temp-scale");
     const tempLimits = document.getElementById("temp-limits");
     if(document.getElementById("toggle-heatmap").checked == true){
         while(tempScale.lastElementChild)
             tempScale.removeChild(tempScale.lastElementChild);
         tempScale.style.display = "flex";
+        tempBox.style.display = "flex";
         for(var i = 50; i >= 0; i--){
             var slice = document.createElement("div");
             slice.className += "temp-gradient-slice";
@@ -225,8 +227,7 @@ function heatmap() {
         tempLimits.firstElementChild.innerHTML = max_orig.toString() + (document.getElementById("celsius").checked ? "&#8451;" : "&#8457;");
         tempLimits.lastElementChild.innerHTML = min_orig.toString() + (document.getElementById("celsius").checked ? "&#8451;" : "&#8457;");
     }else{
-        tempScale.style.display = "none";
-        tempLimits.style.display = "none";
+        tempBox.style.display = "none";
     }
 }
 
