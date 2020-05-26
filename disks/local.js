@@ -26,12 +26,12 @@ function grab_info() {
     var dfd = cockpit.defer();
     document.getElementById("loading").style.display = "block";
     err_box.style.display = "none";
+    document.getElementById("warning-box").style.display = "none";
     var proc = cockpit.spawn(["/usr/local/bin/lsdev","--json"]);
     proc.done(function(data) {
         disk_info = JSON.parse(data);
         dfd.resolve();
         document.getElementById("loading").style.display = "none";
-        document.getElementById("warning-box").style.display = "none";
         document.getElementById("controller").innerHTML = disk_info["meta"]["disk-controller"];
         document.getElementById("driver-vers").innerHTML = disk_info["meta"]["driver-version"];
     });
