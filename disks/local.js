@@ -1,17 +1,23 @@
 const err_msg = document.getElementById("error-output");
+const err_box = document.getElementById("alert-box");
 
 var disk_info;
 
 function grab_info() {
     var dfd = cockpit.defer();
+    document.getElementById("loading").style.display = "block";
+    err_box.style.display = "none";
     var proc = cockpit.spawn(["/usr/local/bin/lsdev","--json"]);
     proc.done(function(data) {
         disk_info = JSON.parse(data);
         dfd.resolve();
+        document.getElementById("loading").style.display = "none";
     });
     proc.fail(function(ex) {
-        err_msg.innerHTML = "Error running lsdev";
+        err_box.style.display = "block";
+        err_msg.innerHTML = "Error running lsdev, are 45Drives tools installed?";
         dfd.reject(ex);
+        document.getElementById("loading").style.display = "none";
     });
     var current_bay = document.getElementById("bay-id").innerHTML;
     if(current_bay != "?") {
@@ -212,7 +218,7 @@ function heatmap() {
         }
         tempLimits.style.display = "flex";
         tempLimits.firstElementChild.innerHTML = max_orig.toString() + (document.getElementById("celsius").checked ? "&#8451;" : "&#8457;");
-        tempLimits.lastElementChild.innerHTML = min_orig.toString() + "&#8451;";
+        tempLimits.lastElementChild.innerHTML = min_orig.toString() + (document.getElementById("celsius").checked ? "&#8451;" : "&#8457;");
     }else{
         tempScale.style.display = "none";
         tempLimits.style.display = "none";

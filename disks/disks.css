@@ -34,6 +34,14 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    flex-grow: 0;
+}
+
+.outer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    flex-grow: 0;
     padding: 25px;
 }
 
@@ -98,9 +106,6 @@ body {
 #info-window {
     display: flex;
     flex-direction: column;
-    background-color: #EEEEEE;
-    padding: 15px;
-    border-radius: 15px;
 }
 
 .key-value-wrapper {
@@ -140,13 +145,6 @@ a.button-45D {
     color: initial;
 }
 
-#error-output {
-    margin-left: 25px;
-    color: #FF0000;
-    font-weight: bold;
-    font-size: 150%;
-}
-
 #toggle-heatmap {
     margin-left: 2em;
 }
@@ -177,6 +175,15 @@ input[type=number] {
     padding: 15px;
     padding-left: 5px;
     border-radius: 15px;
+}
+
+.control-buttons {
+    flex-grow: 0;
+    align-self: center;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 15px;
 }
 
 #temp-scale {
@@ -213,4 +220,12 @@ input[type=radio] {
     margin-right: -5px;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.divider {
+    width: 15px;
+}
+
+#alert-box {
+    display: none;
 }
