@@ -222,9 +222,6 @@ input[type=number] {
 
 #temp-limits p {
     flex-grow: 0;
-    background-color: #FFFFFF;
-    padding: 2.5px;
-    border-radius: 2.5px;
 }
 
 .temp-gradient-slice {
