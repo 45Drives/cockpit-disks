@@ -1,4 +1,22 @@
-
+/*  45Drives/cockpit-disks - Cockpit plugin for displaying disk info
+ *  Copyright (C) 2020 Josh Boudreau <jboudreau@45drives.com>
+ * 
+ *  This file is part of 45Drives/cockpit-disks.
+ *
+ *  Cockpit-disks is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Cockpit-disks is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Cockpit-disks.  If not, see <https://www.gnu.org/licenses/>.
+ */
+ 
 body {
     background-image: url("img/light-background.jpg");
     background-repeat: no-repeat;
@@ -137,19 +155,17 @@ body {
     white-space: nowrap;
 }
 
-.button-45D {
-    font-weight: bold;
-    font-size: 125%;
-    margin-left: 10px;
-    margin-right: 5px;
+.panel-heading {
+    padding-bottom: 3px;
 }
 
-a.button-45D {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    color: initial;
+.panel-heading p {
+    font-size: 85%;
+}
+
+#controller, #driver-vers {
+    font-family: Courier, Monaco, monospace;
+    font-size: 95%;
 }
 
 #toggle-heatmap {

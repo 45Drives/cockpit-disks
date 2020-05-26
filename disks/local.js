@@ -1,3 +1,22 @@
+/*  45Drives/cockpit-disks - Cockpit plugin for displaying disk info
+ *  Copyright (C) 2020 Josh Boudreau <jboudreau@45drives.com>
+ * 
+ *  This file is part of 45Drives/cockpit-disks.
+ *
+ *  Cockpit-disks is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Cockpit-disks is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Cockpit-disks.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 const err_msg = document.getElementById("error-output");
 const err_box = document.getElementById("alert-box");
 
@@ -12,6 +31,8 @@ function grab_info() {
         disk_info = JSON.parse(data);
         dfd.resolve();
         document.getElementById("loading").style.display = "none";
+        document.getElementById("controller").innerHTML = disk_info["meta"]["disk-controller"];
+        document.getElementById("driver-vers").innerHTML = disk_info["meta"]["driver-version"];
     });
     proc.fail(function(ex) {
         err_box.style.display = "block";
