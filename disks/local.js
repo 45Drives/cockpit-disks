@@ -36,9 +36,19 @@ function grab_info() {
     });
     proc.fail(function(ex) {
         err_box.style.display = "block";
-        err_msg.innerHTML = "Error running lsdev, are 45Drives tools installed?";
-        dfd.reject(ex);
         document.getElementById("loading").style.display = "none";
+        if(ex.exit_status == 2) {
+            // permission denied for smartctl, some data still available
+            err_msg.innerHTML = "Error running smartctl within lsdev. Some information is still available, but run as root for full disk information.";
+            disk_info = JSON.parse(data);
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("controller").innerHTML = disk_info["meta"]["disk-controller"];
+            document.getElementById("driver-vers").innerHTML = disk_info["meta"]["driver-version"];
+            dfd.resolve();
+        }else{
+            err_msg.innerHTML = "Error running lsdev, are 45Drives tools installed?";
+            dfd.reject(ex);
+        }
     });
     var current_bay = document.getElementById("bay-id").innerHTML;
     if(current_bay != "?") {
