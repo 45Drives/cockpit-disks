@@ -255,6 +255,6 @@ input[type=radio] {
     width: 15px;
 }
 
-#alert-box {
+#alert-box, #warning-box {
     display: none;
 }
