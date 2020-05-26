@@ -34,7 +34,7 @@ function grab_info() {
         document.getElementById("controller").innerHTML = disk_info["meta"]["disk-controller"];
         document.getElementById("driver-vers").innerHTML = disk_info["meta"]["driver-version"];
     });
-    proc.fail(function(ex) {
+    proc.fail(function(ex, data) {
         err_box.style.display = "block";
         document.getElementById("loading").style.display = "none";
         console.log(ex);
