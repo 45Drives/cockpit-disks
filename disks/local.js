@@ -27,29 +27,30 @@ function grab_info() {
     document.getElementById("loading").style.display = "block";
     err_box.style.display = "none";
     document.getElementById("warning-box").style.display = "none";
-    var proc = cockpit.spawn(["/usr/local/bin/lsdev","--json"]);
+    var proc = cockpit.spawn(["/usr/bin/pkexec","/usr/bin/lsdev","--json"], {err: "out"});
+    proc.always({
+        document.getElementById("loading").style.display = "none";
+    });
     proc.done(function(data) {
         disk_info = JSON.parse(data);
         dfd.resolve();
-        document.getElementById("loading").style.display = "none";
         document.getElementById("controller").innerHTML = disk_info["meta"]["disk-controller"];
         document.getElementById("driver-vers").innerHTML = disk_info["meta"]["driver-version"];
     });
     proc.fail(function(ex, data) {
-        document.getElementById("loading").style.display = "none";
-        if(ex.exit_status == 2) {
+        if(ex.exit_status & (1<<2)) { // bit test, see man smartctl for exit code description
             // permission denied for smartctl, some data still available
             document.getElementById("warning-output").innerHTML = 
-                "Error running smartctl within lsdev. Some information is still available, but run as root for full disk information.";
+                "Error running smartctl within lsdev. Some information is still available, but run as privileged user for full disk information.";
             document.getElementById("warning-box").style.display = "block"
             disk_info = JSON.parse(data);
-            document.getElementById("loading").style.display = "none";
             document.getElementById("controller").innerHTML = disk_info["meta"]["disk-controller"];
             document.getElementById("driver-vers").innerHTML = disk_info["meta"]["driver-version"];
             dfd.resolve();
         }else{
             err_box.style.display = "block";
-            err_msg.innerHTML = "Error running lsdev, are 45Drives tools installed?";
+            err_msg.innerHTML = "Error running lsdev, are 45Drives tools installed?<br>";
+            err_msg.innerHTML += `<pre>${ex.message}\n${data}</pre>`
             dfd.reject(ex);
         }
     });
