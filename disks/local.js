@@ -38,7 +38,7 @@ function grab_info() {
         document.getElementById("driver-vers").innerHTML = disk_info["meta"]["driver-version"];
     });
     proc.fail(function(ex, data) {
-        if(ex.exit_status & (1<<2)) { // bit test, see man smartctl for exit code description
+        if(ex.exit_status != 127 && ex.exit_status & (1<<1)) { // bit test, see man smartctl for exit code description
             // permission denied for smartctl, some data still available
             document.getElementById("warning-output").innerHTML = 
                 "Error running smartctl within lsdev. Some information is still available, but run as privileged user for full disk information.";
