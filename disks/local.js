@@ -28,7 +28,6 @@ function grab_info() {
     err_box.style.display = "none";
     document.getElementById("warning-box").style.display = "none";
     var proc = cockpit.spawn(["/usr/bin/pkexec",
-    "/usr/bin/env","ALIAS_DEVICE_PATH=$ALIAS_DEVICE_PATH","ALIAS_CONFIG_PATH=$ALIAS_CONFIG_PATH",
     "/usr/bin/lsdev","--json"], {err: "out"});
     proc.always(function() {
         document.getElementById("loading").style.display = "none";
