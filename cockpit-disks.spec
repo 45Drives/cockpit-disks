@@ -39,7 +39,7 @@ cp -a disks/ %{buildroot}/usr/share/cockpit/
 rm -rf %{buildroot}
 
 %files
-%dir /usr/share/cockpit/zfs
+%dir /usr/share/cockpit/disks
 %defattr(-,root,root,-)
 /usr/share/cockpit/disks/*
 
